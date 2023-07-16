@@ -22,7 +22,7 @@
         <h2 class="title">Add Items</h2>
         <form class="form-inline mb-3">
           <input class="form-control mr-2" type="text" />
-          <button type="submit" class="btn btn-dark mt-2">Submit</button>
+          <input type="submit" class="btn btn-dark mt-2" value="Submit"></input>
         </form>
 
         <h2 class="title">Items</h2>
@@ -64,12 +64,44 @@
     //   }
 
     //by tag name
-    var li = document.getElementsByTagName('li');
-      li[2].style.color = "green";
-      for (var i = 0; i < li.length; i++) {
-        li[i].style.fontWeight = "bold";
-        li[i].style.backgroundColor = "#f4f4f4";
-      }
+    // var li = document.getElementsByTagName('li');
+    //   li[2].style.color = "green";
+    //   for (var i = 0; i < li.length; i++) {
+    //     li[i].style.fontWeight = "bold";
+    //     li[i].style.backgroundColor = "#f4f4f4";
+    //   }
+
+    //querySelector
+    // var head = document.querySelector('#main-header');
+    // head.style.border = 'solid 3px black';
+
+    // var inp = document.querySelector('input');
+    // inp.value = 'My Name Is Harshil';
+
+    // var sub = document.querySelector('input[type="submit"]');
+    // sub.value = "Send";
+
+    var Seconditem = document.querySelector('.list-group-item:nth-child(2)');
+    Seconditem.style.background = 'green';
+   
+
+    var thirditem = document.querySelector('.list-group-item:nth-child(3)');
+    thirditem.style.display = 'none';
+
+    //querySelectorall
+
+    // var qall = document.querySelectorAll('.title');
+    // qall[0].textContent = 'Hello';
+
+    var two = document.querySelectorAll('.list-group-item');
+    two[1].style.color = 'white';
+
+    var odd = document.querySelectorAll('li:nth-child(odd)');
+
+    for(var i=0; i<odd.length; i++){
+        odd[i].style.background = '#82E0AA';
+    }
+
     </script>
 
     <script
