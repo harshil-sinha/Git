@@ -27,7 +27,7 @@
 
         <h2 class="title">Items</h2>
 
-        <ul class="list-group">
+        <ul class="list-group" id="items">
           <li class="list-group-item">One</li>
           <li class="list-group-item">Two</li>
           <li class="list-group-item">Three</li>
@@ -37,71 +37,110 @@
     </div>
 
     <script>
-      // console.log(document.domain);
-      // console.log(document.URL);
-      // console.log(document.title);
-      // document.title="My-website";
-      // console.log(document.all);
-      // console.log(document.all[10]);
-      // document.all[12].textContent = "Hello";
+    //   // console.log(document.domain);
+    //   // console.log(document.URL);
+    //   // console.log(document.title);
+    //   // document.title="My-website";
+    //   // console.log(document.all);
+    //   // console.log(document.all[10]);
+    //   // document.all[12].textContent = "Hello";
 
-      //by id name
-      // console.log(document.getElementById('header-title'));
-      // var headTitle = document.getElementById('header-title');
-      // var head = document.getElementById('main-header');
-      // head.style.border = "solid 2px red";
+    //   //by id name
+    //   // console.log(document.getElementById('header-title'));
+    //   // var headTitle = document.getElementById('header-title');
+    //   // var head = document.getElementById('main-header');
+    //   // head.style.border = "solid 2px red";
 
-      // headTitle.innerHTML = "Navbar";
-      // headTitle.style.border = "solid 2px black";
-      // headTitle.style.color = "green";
+    //   // headTitle.innerHTML = "Navbar";
+    //   // headTitle.style.border = "solid 2px black";
+    //   // headTitle.style.color = "green";
 
-      //by class name
-    //   var cls = document.getElementsByClassName("list-group-item");
-    //   cls[2].style.color = "green";
-    //   for (var i = 0; i < cls.length; i++) {
-    //     cls[i].style.fontWeight = "bold";
-    //     cls[i].style.background = "#f4f4f4";
-    //   }
+    //   //by class name
+    // //   var cls = document.getElementsByClassName("list-group-item");
+    // //   cls[2].style.color = "green";
+    // //   for (var i = 0; i < cls.length; i++) {
+    // //     cls[i].style.fontWeight = "bold";
+    // //     cls[i].style.background = "#f4f4f4";
+    // //   }
 
-    //by tag name
-    // var li = document.getElementsByTagName('li');
-    //   li[2].style.color = "green";
-    //   for (var i = 0; i < li.length; i++) {
-    //     li[i].style.fontWeight = "bold";
-    //     li[i].style.backgroundColor = "#f4f4f4";
-    //   }
+    // //by tag name
+    // // var li = document.getElementsByTagName('li');
+    // //   li[2].style.color = "green";
+    // //   for (var i = 0; i < li.length; i++) {
+    // //     li[i].style.fontWeight = "bold";
+    // //     li[i].style.backgroundColor = "#f4f4f4";
+    // //   }
 
-    //querySelector
-    // var head = document.querySelector('#main-header');
-    // head.style.border = 'solid 3px black';
+    // //querySelector
+    // // var head = document.querySelector('#main-header');
+    // // head.style.border = 'solid 3px black';
 
-    // var inp = document.querySelector('input');
-    // inp.value = 'My Name Is Harshil';
+    // // var inp = document.querySelector('input');
+    // // inp.value = 'My Name Is Harshil';
 
-    // var sub = document.querySelector('input[type="submit"]');
-    // sub.value = "Send";
+    // // var sub = document.querySelector('input[type="submit"]');
+    // // sub.value = "Send";
 
-    var Seconditem = document.querySelector('.list-group-item:nth-child(2)');
-    Seconditem.style.background = 'green';
+    // // var Seconditem = document.querySelector('.list-group-item:nth-child(2)');
+    // // Seconditem.style.background = 'green';
    
 
-    var thirditem = document.querySelector('.list-group-item:nth-child(3)');
-    thirditem.style.display = 'none';
+    // // var thirditem = document.querySelector('.list-group-item:nth-child(3)');
+    // // thirditem.style.display = 'none';
 
-    //querySelectorall
+    // // //querySelectorall
 
-    // var qall = document.querySelectorAll('.title');
-    // qall[0].textContent = 'Hello';
+    // // // var qall = document.querySelectorAll('.title');
+    // // // qall[0].textContent = 'Hello';
 
-    var two = document.querySelectorAll('.list-group-item');
-    two[1].style.color = 'white';
+    // // var two = document.querySelectorAll('.list-group-item');
+    // // two[1].style.color = 'white';
 
-    var odd = document.querySelectorAll('li:nth-child(odd)');
+    // // var odd = document.querySelectorAll('li:nth-child(odd)');
 
-    for(var i=0; i<odd.length; i++){
-        odd[i].style.background = '#82E0AA';
-    }
+    // // for(var i=0; i<odd.length; i++){
+    // //     odd[i].style.background = '#82E0AA';
+    // // }
 
+    // // traversing the dom
+
+    // //parentNode
+    var itemList = document.querySelector('#items');
+
+    // // // console.log(itemList.parentNode);
+    // // itemList.parentNode.style.background = '#f4f4f4';
+    // // console.log(itemList.parentNode.parentNode.parentNode);
+
+    // //parentElement
+    
+    console.log(itemList.parentElement);
+    // // itemList.parentElement.style.background = '#f4f4f4';
+    // // console.log(itemList.parentElement.parentElement.parentElement);
+
+    // //childNode
+
+    // console.log(itemList.childNodes);
+    // console.log(itemList.children);
+    // console.log(itemList.children[1]);
+    // itemList.children[1].style.background = 'yellow';
+    // console.log(itemList.firstChild);
+    // console.log(itemList.firstElementChild);
+    // itemList.firstElementChild.textContent = "Hy";
+    // console.log(itemList.lastChild);
+    // console.log(itemList.nextSibling);
+    // console.log(itemList.nextElementSibling);
+    // console.log(itemList.previousSibling);
+    // console.log(itemList.previousElementSibling);
+    // itemList.previousElementSibling.style.color = 'blue';
+
+    var newDiv = document.createElement('div');
+    newDiv.className = "hello";
+    newDiv.setAttribute('title','Hello div');
+
+    var divtext = document.createTextNode('Hello Sir');
+    newDiv.append(divtext);
+
+    console.log(newDiv);
     </script>
 
     <script
