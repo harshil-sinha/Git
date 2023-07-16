@@ -14,24 +14,34 @@
   <body>
     <header id="main-header" class="bg-primary text-white p-4 mb-3">
       <div class="container">
+        <div class="row">
+            <div class="col-md-6">
         <h1 id="header-title">Item Lister</h1>
+        </div>
+
+        <div class="col-md-4 align-self-center">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="filter">
+           
+            </div>
+        </div>
       </div>
+     
     </header>
     <div class="container-md">
       <div id="main" class="card card-body">
         <h2 class="title">Add Items</h2>
-        <form class="form-inline mb-3">
-          <input class="form-control mr-2" type="text" />
+        <form class="form-inline mb-3" id="addForm">
+          <input class="form-control mr-2" type="text" id="item" />
           <input type="submit" class="btn btn-dark mt-2" value="Submit"></input>
         </form>
 
         <h2 class="title">Items</h2>
 
         <ul class="list-group" id="items">
-          <li class="list-group-item">One</li>
-          <li class="list-group-item">Two</li>
-          <li class="list-group-item">Three</li>
-          <li class="list-group-item">Four</li>
+          <li class="list-group-item">One<button class="btn btn-danger btn-sm float-end delete">X</button></li>
+          <li class="list-group-item">Two<button class="btn btn-danger btn-sm float-end delete">X</button></li>
+          <li class="list-group-item">Three<button class="btn btn-danger btn-sm float-end delete">X</button></li>
+          <li class="list-group-item">Four<button class="btn btn-danger btn-sm float-end delete">X</button></li>
         </ul>
       </div>
     </div>
@@ -105,7 +115,7 @@
     // // traversing the dom
 
     // //parentNode
-    var itemList = document.querySelector('#items');
+    // var itemList = document.querySelector('#items');
 
     // // // console.log(itemList.parentNode);
     // // itemList.parentNode.style.background = '#f4f4f4';
@@ -113,7 +123,7 @@
 
     // //parentElement
     
-    console.log(itemList.parentElement);
+    // console.log(itemList.parentElement);
     // // itemList.parentElement.style.background = '#f4f4f4';
     // // console.log(itemList.parentElement.parentElement.parentElement);
 
@@ -133,14 +143,52 @@
     // console.log(itemList.previousElementSibling);
     // itemList.previousElementSibling.style.color = 'blue';
 
-    var newDiv = document.createElement('div');
-    newDiv.className = "hello";
-    newDiv.setAttribute('title','Hello div');
+    // var newDiv = document.createElement('div');
+    // newDiv.className = "hello";
+    // newDiv.setAttribute('title','Hello div');
 
-    var divtext = document.createTextNode('Hello Sir');
-    newDiv.append(divtext);
+    // var divtext = document.createTextNode('Hello Sir');
+    // newDiv.append(divtext);
 
-    console.log(newDiv);
+    // console.log(newDiv);
+    
+       var form = document.getElementById('addForm');
+       var itemList = document.getElementById('items');
+    //    var filter = document.getElementById('filter');
+
+
+       form.addEventListener('submit',myFun);
+       itemList.addEventListener('click',remove);
+    //    filter.addEventListener('keyup',filterI);
+
+       function myFun(e) {
+            e.preventDefault();
+            var newItem = document.getElementById('item').value;
+
+            var li = document.createElement('li');
+            li.className = 'list-group-item';
+            li.appendChild(document.createTextNode(newItem));
+
+            var del = document.createElement('button');
+            del.className = "btn btn-danger btn-sm float-end";
+            del.appendChild(document.createTextNode('X'));
+            li.appendChild(del);
+
+            itemList.appendChild(li);
+       }
+
+       function remove(e) {
+            if(e.target.classList.contains('delete')){
+                if(confirm("Are you sure?")){
+                    var li = e.target.parentElement;
+                    itemList.removeChild(li);
+                }
+            }
+       }
+
+    //    function filterI(e) {
+
+    //    }
     </script>
 
     <script
