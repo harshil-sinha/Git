@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Handling Example</title>
+</head>
+<body>
+  <form>
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input">
+    <button id="submitButton" type="button">Submit</button>
+    <div class="msg" style="color: red;"></div>
+    <div id="msg" style="color: green;"></div>
+  </form>
+
+  <script>
+    const inputElement = document.getElementById('input');
+    const submitButton = document.getElementById('submitButton');
+    const msg = document.querySelector('.msg');
+
+    function handleClick() {
+      const inputValue = inputElement.value.trim();
+
+      if (inputValue === '') {
+       document.querySelector('.msg').innerHTML='Please enter name';
+       setTimeout(() => {
+            msg.innerHTML='BYE';
+            // msg.remove();
+       }, 3000);
+       setTimeout(() => {
+            
+            msg.remove();
+       }, 4000);
+      } else {
+        document.querySelector('#msg').innerHTML=`Hello ${inputValue}`;
+        
+      }
+    }
+
+    submitButton.addEventListener('click', handleClick);
+  </script>
+</body>
+</html>
