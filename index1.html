@@ -51,13 +51,20 @@
         // console.log(document.all[10]);
         // document.all[12].textContent = "Hello";
         // console.log(document.getElementById('header-title'));
-        var headTitle = document.getElementById('header-title');
-        var head = document.getElementById('main-header');
-        head.style.border = "solid 2px red";
+        // var headTitle = document.getElementById('header-title');
+        // var head = document.getElementById('main-header');
+        // head.style.border = "solid 2px red";
 
-        headTitle.innerHTML = "Navbar";
-        headTitle.style.border = "solid 2px black";
-        headTitle.style.color = "green";
+        // headTitle.innerHTML = "Navbar";
+        // headTitle.style.border = "solid 2px black";
+        // headTitle.style.color = "green";
+
+        var cls = document.getElementsByClassName('list-group-item');
+        cls[2].style.color = 'green';
+       for(var i=0; i<cls.length; i++){
+        cls[i].style.fontWeight ='bold';
+        cls[i].style.background ='#f4f4f4';
+       }
    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
