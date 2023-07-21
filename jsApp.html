@@ -12,120 +12,133 @@
     <title>My-Web</title>
   </head>
   <body>
-    <div class="container-md  min-vh-100  justify-content-center align-items-center bg-body-secondary">
-        <h1 class="text-center text-dark">Login Page</h1>
-        <form id="my-form">
-            <div class="mb-3">
-                <div class="msg"></div>
-                <label for="exampleInputEmail1" class="form-label">Name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-               
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="text" class="form-control" id="exampleInputPassword1">
-              </div>
-               
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary mb-2" id="submit">Submit</button>
-                <br>
-                <button type="submit" class="btn btn-primary mb-2" id="del" onclick="delfun()">Delete</button>
-              </div>
-              </form>
-              <ul class="list-group" id="users">
-              
-              <!-- <ul class="list-group" id="items">
-                <li class="list-group-item">One</li>
-                <li class="list-group-item">Two</li>
-                <li class="list-group-item">Three</li>
-                
-              </ul> -->
+    <div
+      class="container-md min-vh-100 justify-content-center align-items-center bg-body-secondary"
+    >
+      <h1 class="text-center text-dark">Login Page</h1>
+      <form id="my-form">
+        <div class="mb-3">
+          <div class="msg"></div>
+          <label for="exampleInputEmail1" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
         </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="text" class="form-control" id="exampleInputPassword1" />
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mb-2" id="submit">
+            Submit
+          </button>
+          <br />
+          <button type="button" class="btn btn-primary mb-2" id="del">
+            Delete
+          </button>
+        </div>
+      </form>
+      <ul class="list-group" id="users"></ul>
+    </div>
 
+    <script>
+      const sub = document.getElementById("submit");
+      const delBtn = document.getElementById("del");
+      const name = document.getElementById("exampleInputEmail1");
+      const pass = document.getElementById("exampleInputPassword1");
+      const msg = document.querySelector(".msg");
+      const ul = document.querySelector("#users");
+      const userDetails = {};
 
+      sub.addEventListener("click", onSubmit);
+      delBtn.addEventListener("click", delfun);
 
+      function onSubmit(e) {
+        e.preventDefault();
+        if (name.value === "" || pass.value === "") {
+          msg.classList.add("text-white");
+          msg.classList.add("bg-danger");
+          msg.innerHTML = "<h5>Please enter all fields</h5>";
 
-        <script>
-            // const sub = document.getElementById('submit');
-            // const name = document.getElementById('exampleInputEmail1');
-            // const pass = document.getElementById('exampleInputPassword1');
-            const msg = document.querySelector('.msg');
-            // const ul = document.querySelector('#users');
-            // sub.addEventListener('submit', onSubmit);
+          setTimeout(() => {
+            msg.innerHTML = "";
+            msg.classList.remove("text-white", "bg-danger");
+          }, 3000);
+        } else {
+          const name1 = name.value;
+          const pass1 = pass.value;
 
-            // function onSubmit(e) {
-                // e.preventDefault();
-                // if(name.value===''){
-                //    msg.classList.add('text-white');
-                //    msg.classList.add('bg-danger');
-                //    msg.innerHTML = "<h5>Please enter all field</h5>";
+          // If the user already exists, update the details
+          if (userDetails[name1]) {
+            userDetails[name1].pass = pass1;
+            // Update the existing list item
+            const listItem = document.getElementById(`user-${name1}`);
+            listItem.innerHTML = `${name1} : ${pass1} <button type="button" class="btn btn-sm btn-secondary" onclick="editUser('${name1}', '${pass1}')">Edit</button>`;
+          } else {
+            userDetails[name1] = { name1, pass1 };
+            const li = document.createElement("li");
+            li.classList.add("list-group-item");
+            li.innerHTML = `${name1} : ${pass1} <button type="button" class="btn btn-sm btn-secondary" onclick="editUser('${name1}', '${pass1}')">Edit</button>`;
+            li.setAttribute("id", `user-${name1}`);
+            ul.appendChild(li);
+          }
 
-                //    setTimeout(() => {
-                //     msg.remove();
-                //    }, 3000);
-                // }
-                // else if(pass.value===''){
-                //    msg.classList.add('text-white');
-                //    msg.classList.add('bg-danger');
-                //    msg.innerHTML = "<h5>Please enter all field</h5>";
+          name.value = "";
+          pass.value = "";
+        }
+      }
 
-                //    setTimeout(() => {
-                //     msg.remove();
-                //    }, 3000);
-                // }
-                // else{
-                //    const li = document.createElement('li');
-                //    li.classList.add('list-group-item');
-                //    li.appendChild(document.createTextNode(`${name.value} : ${pass.value}`));
-                //    ul.appendChild(li);
+      const form = document.getElementById("my-form");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-                //    name.value = '';
-                //    pass.value = '';
-                // }    
+        const existingUserDetailsJSON = localStorage.getItem("userDetails");
+        const existingUserDetails = existingUserDetailsJSON
+          ? JSON.parse(existingUserDetailsJSON)
+          : {};
 
-            // }
+        // Retrieve the values from the input fields
+        const name = document.getElementById("exampleInputEmail1").value;
+        const pass = document.getElementById("exampleInputPassword1").value;
 
-            const form = document.getElementById('my-form');
-            form.addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Create a new user object
+        const newUser = {
+          name: name,
+          pass: pass,
+        };
 
-            const existingUserDetailsJSON = localStorage.getItem('userDetails');
-            const existingUserDetails = existingUserDetailsJSON ? JSON.parse(existingUserDetailsJSON) : {};
+        // Add the new user to the existing user details
+        existingUserDetails[newUser.name] = newUser;
 
-            // Retrieve the values from the input fields
-            const name = document.getElementById('exampleInputEmail1').value;
-            const pass = document.getElementById('exampleInputPassword1').value;
+        // Convert the updated user details object to a JSON string
+        const updatedUserDetailsJSON = JSON.stringify(existingUserDetails);
 
-            // Create a new user object
-            const newUser = {
-                name: name,
-                pass: pass
-            };
+        // Store the updated user details in the local storage
+        localStorage.setItem("userDetails", updatedUserDetailsJSON);
 
-            // Add the new user to the existing user details
-            existingUserDetails[newUser.name] = newUser;
+        // Reset the form fields after submission
+        document.getElementById("exampleInputEmail1").value = "";
+        document.getElementById("exampleInputPassword1").value = "";
+      });
 
-            // Convert the updated user details object to a JSON string
-            const updatedUserDetailsJSON = JSON.stringify(existingUserDetails);
+      function delfun() {
+        localStorage.removeItem("userDetails");
+        msg.innerHTML = "<h5>Deleted</h5>";
+      }
 
-            // Store the updated user details in the local storage
-            localStorage.setItem('userDetails', updatedUserDetailsJSON);
-
-            // Reset the form fields after submission
-            document.getElementById('exampleInputEmail1').value = '';
-            document.getElementById('exampleInputPassword1').value = '';
-            });
-            
-            function delfun(){
-                localStorage.removeItem("userDetails");
-                msg.innerHTML = "Deleted";
-            }
-        </script>
+      function editUser(name, pass) {
+        document.getElementById("exampleInputEmail1").value = name;
+        document.getElementById("exampleInputPassword1").value = pass;
+      }
+    </script>
 
     <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-    crossorigin="anonymous"
-  ></script>
-</body>
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
